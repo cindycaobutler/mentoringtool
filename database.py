@@ -19,12 +19,12 @@ import json
 
 class DB():
 
-	def __init__():
+	def __init__(self):
 		self.client = MongoClient('mongodb://localhost:27017/')
-		self.db = client.mentor_tool
+		self.db = self.client.mentor_tool
 		self.user_table = self.db.user_table
 
-	def insertPost(user_data):
+	def insertPost(self, user_data):
 		"""
 		Input parameter: 
 			user_data: string, must be key value pair JSON
@@ -33,10 +33,12 @@ class DB():
 
 		Converts input string to dictionary and insert it to the table.
 		"""
+
+		print(user_data)
 		data = json.loads(user_data);
 		post_id = self.user_table.insert_one(data)
 
-	def readPost(user_id, attr=None):
+	def readPost(self, user_id, attr=None):
 		"""
 		Input parameter: 
 			user_id: string
@@ -51,7 +53,7 @@ class DB():
 			return None
 
 		query_filter = {'user_id': user_id}
-		if attr not None:
+		if attr:
 			attr_json = json.loads(attr);
 			for key, value in attr_json:
 				query_filter[key] = value
@@ -60,7 +62,7 @@ class DB():
 
 		return data
 
-	def deletePost(user_id):
+	def deletePost(self, user_id):
 		"""
 		Input parameter:
 			user_id: string
@@ -75,7 +77,7 @@ class DB():
 		query_filter = {'user_id': user_id}
 		self.user_table.remove(query_filter)
 
-	def checkExist(user_id):
+	def checkExist(self, user_id):
 		""" 
 		Input parameter: 
 			user_id: string
@@ -92,7 +94,7 @@ class DB():
 
 		return False
 
-	def update(user_id, user_data):
+	def update(self, user_id, user_data):
 		"""
 		Input parameter:
 		user_id: string
@@ -113,13 +115,25 @@ class DB():
 
 		return True
 
-if name == "__main__":
+if __name__ == "__main__":
 	db = DB()
-	data = {'user_id': user_id, 'name': name, 'job category': job_category, 'years for current job category': years, 
-			'skills': skills, 'requirements': requirements, 'method': method, 'self assesment': self_assesment, 
-			'mentor': mentor, 'programs': programs, 'calendar': calendar}
+	user_id = 0
+	name = "miaomiao"
+	job_category = "SDE manager"
+	years = 5
+	skills = "Java, Python, AWS"
+	requirements = "public speaking, leadership, music"
+	method = 'online'
+	self_assesment = '10, 10, 10'
+	is_mentor = False
+	programs = "[]"
+	calendar = ""
 
-	
+	data = "{'user_id': %d, 'name': %s, 'job category': %s, 'years for current job category': %d, 'skills': %s, 'requirements': %s, 'method': %s, 'self assesment': %s, 'is mentor': %s, 'programs': %s, 'calendar': %s}" \
+	% (user_id, name, job_category, years, skills, requirements, method, self_assesment, is_mentor, programs, calendar)
+	db.insertPost(data)
+
+
 
 
 
