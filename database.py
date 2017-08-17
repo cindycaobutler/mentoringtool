@@ -27,7 +27,7 @@ class DB():
 					 {Mkt
 					]
 					age_range  = [array eg values 20-30 etc ]
-					years of job_category = integer 
+					years_of_job_category = integer 
 					personality color = [array with blue, red, green ,yellow ]
 					Interests = string
 					skills = json object
@@ -118,7 +118,7 @@ class DB():
 		Input parameter:
 			user_id: int
 		Output parameter: 
-			void
+			boolean indicate is delete post is successful
 
 		Remove a document from DB by user_id if user_id exist.
 		"""
@@ -149,10 +149,10 @@ class DB():
 	def update(self, user_id, user_data):
 		"""
 		Input parameter:
-		user_id: string
-		data: string, must be a kay value pair JSON
+			user_id: integer
+			data: string, must be a kay value pair JSON
 		Output parameter:
-		boolean indicates if update is successful or not
+			boolean indicates if update is successful or not
 		"""
 
 		if not self.checkExist(user_id):
