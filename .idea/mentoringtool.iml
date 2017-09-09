@@ -4,13 +4,8 @@
     <facet type="django" name="Django">
       <configuration>
         <option name="rootFolder" value="$MODULE_DIR$" />
-<<<<<<< HEAD
         <option name="settingsModule" value="mentoringtool/settings.py" />
-        <option name="manageScript" value="$MODULE_DIR$/manage.py" />
-=======
-        <option name="settingsModule" value="untitled5/settings.py" />
         <option name="manageScript" value="manage.py" />
->>>>>>> 77b10270b8cc3872f41f4b1aae88b37fca80d263
         <option name="environment" value="&lt;map/&gt;" />
       </configuration>
     </facet>
@@ -22,14 +17,11 @@
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
-<<<<<<< HEAD
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../mentoringtool\templates" />
+        <option value="$MODULE_DIR$/templates" />
       </list>
     </option>
-=======
->>>>>>> 77b10270b8cc3872f41f4b1aae88b37fca80d263
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
