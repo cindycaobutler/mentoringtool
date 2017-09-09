@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Job years</th>
+        <th>Updated at</th>
+    </tr>
+    {% for item in queryresults %}
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.location }}</td>
+        <td>{{ item.job_years }}</td>
+        <td>{{ item.updated_at }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
