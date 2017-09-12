@@ -4,7 +4,8 @@ from pymongo import MongoClient
 
 import datetime
 import json
-
+from mongoengine import *
+connect('mentor_tool')
 
 class DB():
 	'''
@@ -74,7 +75,7 @@ class DB():
 
 
 
-	def insertPost(self, table, user_data):
+	def insertPost(self, table, data):
 		"""
 		Input parameter: 
 			user_data: string, must be key value pair JSON
@@ -88,10 +89,13 @@ class DB():
 		
 
 		"""
-
-		if not self.validateTable(table):
+		#print(data['id'])
+		#print(self.checkExist(table, data['id']))
+		if self.checkExist(table, data['id']) or not self.validateTable(table):
+			print("hehe")
 			return False
-
+		else:
+			print("????????")
 		res = True
 		try:
 			if table == 'user':
@@ -102,6 +106,8 @@ class DB():
 			print("Duplicate key, insertion failed!")
 			res = False
 		finally:
+			print("Write status " + str(post_id.acknowledged))
+			#print("Post id " + str(post_id.insertedId))
 			if res:
 				print("Insertion success")
 			return res
@@ -172,7 +178,7 @@ class DB():
 			cnt = self.user_table.find(query_filter).count()
 		else:
 			cnt = self.prog_table.find(query_filter).count()
-
+		print(cnt)
 		if (cnt > 0):
 			return True
 
