@@ -1,0 +1,189 @@
+
+const { Component } = React;
+const { Provider } = ReactRedux;
+const {
+  createStore,
+  applyMiddleware
+} = Redux;
+const {
+  Field,
+  Control,
+  Form,
+  combineForms
+} = ReactReduxForm;
+const thunk = ReduxThunk.default;
+const logger = reduxLogger();
+
+const initialUserState = {
+  firstName: '',
+  lastName: '',
+  city: "",
+  state: "",
+  age_range: "",
+  // contact: "",
+  email: "",
+  phone: "",
+  // education: "",
+  major:"",
+  degree:"",
+  // workExperience: "",
+  jobCategory:"",
+  level: "",
+  mentor: "mentor",
+  interests:"",
+  password: '',
+
+};
+
+const store = createStore(combineForms({
+  user: initialUserState,
+}), applyMiddleware(thunk));
+
+class UserForm extends Component {
+  render() {
+    return (
+      <Form model="user" onSubmit={v => console.log(v)}>
+        <div className="field">
+          <label>First name:</label>
+          <Control.text model=".firstName" placeholder="First Name" />
+        </div>
+
+        <div className="field">
+          <label>Last name:</label>
+          <Control.text model=".lastName" placeholder="Last Name" />
+        </div>
+                
+        <div className="field">
+          <label>City:</label>
+          <Control model=".city" type="city" placeholder="" />
+        </div>
+        
+        <div className="field">
+          <label>State:</label>
+          <Control model=".city" type="city" placeholder="" />
+        </div>
+        
+        <div className="field">
+          <label>Age Range:</label>
+          <label><Control.radio model=".age" value="under20" /> Under 20</label>
+          <label><Control.radio model=".age" value="20to25" /> 20-25</label>
+          <label><Control.radio model=".age" value="26to30" /> 26-30</label>
+          <label><Control.radio model=".age" value="31to35" /> 31-35</label>
+          <label><Control.radio model=".age" value="36to40" /> 36-40</label>
+          <label><Control.radio model=".age" value="41to45" /> 41-45</label>
+          <label><Control.radio model=".age" value="46to50" /> 46-50</label>
+          <label><Control.radio model=".age" value="51to55" /> 51-55</label>
+          <label><Control.radio model=".age" value="56plus" /> 56+</label>
+        </div>
+        
+         <div className="field">
+          <label>Email:</label>
+          <Control model=".email" type="email" placeholder="something@example.com" />
+        </div>
+        
+         <div className="field">
+          <label>Phone:</label>
+          <Control model=".phone" type="phone" placeholder="(111) 111-1111" />
+        </div>
+        
+        <div className="field">
+          <label>Major</label>
+          <Control.select model=".major">
+            <option value=""></option>
+            <option value="associate's">Associate</option>
+            <option value="bachelor's">Bachelor</option>
+            <option value="master's">Master</option>
+            <option value="doctoral">Ph.D.</option>
+            <option value="professional">Professional</option>
+            <option value="other">Other</option>
+          </Control.select>
+        </div>
+        
+        <div className="field">
+          <label>Degree</label>
+          <Control.select model=".major">
+            <option value=""></option>
+            <option value="">Accounting</option>
+            <option value="">Agriculture</option>
+            <option value="">Anthropology</option>
+            <option value="">Architecture</option>
+            <option value="">Art</option>
+            <option value="">Artifical Intelligence</option>
+            <option value="">Aviation</option>
+            <option value="">Biology</option>
+            <option value="">Biochemistry</option>
+            <option value="">Biomedical Engineering</option>
+            <option value="">Business Administration</option>
+            <option value="">Chemical Engieering</option>
+            <option value="">Civil Engineering</option>
+            <option value="">Communications</option>
+            <option value="">Computer and Information Science</option>
+            <option value="">Computer Engineering</option>
+            <option value="">Computer Graphics</option>
+            <option value="">Computer Science</option>
+            <option value="">Computer Systems Analysis</option>
+            <option value="">Economics</option>
+            <option value="">Education</option>
+            <option value="">Electrical Engineering</option>
+            <option value="">Engieering</option>
+            <option value="">Entrepreneurship</option>
+            <option value="">Ethnic Studies</option>
+            <option value="">Fiance</option>
+            <option value="">Government</option>
+            <option value="">History</option>
+            <option value="">Human Resources</option>
+            <option value="">Information Technology</option>
+            <option value="">Marketing</option>
+            <option value="">Mathematics</option>
+            <option value="">Other</option>
+            <option value="">Pharmacy</option>
+            <option value="">Political Science</option>
+            <option value="">Pyschology</option>
+            <option value="">Real Estate</option>
+            <option value="">Sociology</option>
+            <option value="">Statistics</option>
+            <option value="">Technical Writing</option>
+            <option value="">Web Design</option>
+          </Control.select>
+        </div>
+        
+        <div className="field">
+          <label>School:</label>
+          <Control model=".school" type="school" placeholder="" />
+        </div>
+        
+        <div className="field">
+          <label>You do wish to be a mentor or mentee?</label>
+          <label><Control.checkbox model=".mentor" value="mentor" /> mentor</label>
+          <label><Control.checkbox model=".mentee" value="mentee" /> mentee</label>
+        </div>     
+        
+        <div className="field">
+          <label>Interests</label>
+          <Control.textarea model=".notes" />
+        </div>
+
+   
+        
+        <button type="submit">
+          Submit
+        </button>
+        <Control.reset model="user" className="secondary">
+          Clear Values
+        </Control.reset>
+      </Form>
+    );
+  }
+}
+
+class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <UserForm />
+      </Provider>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'));
